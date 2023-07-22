@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD MAPPER 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.syh.bilibili.dao.UserDao">
+    <select id="getUserByPhone" parameterType="java.lang.String" resultType="com.syh.bilibili.domain.User">
+        SELECT
+            *
+        FROM
+            t_user
+        WHERE
+            phone = #{phone}
+    </select>
+
+    <insert id="addUser" parameterType="com.syh.bilibili.domain.User" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO
+            t_user(
+                phone,
+                email,
+                password,
+                salt,
+                createTime
+            ) VALUES (
+                #{phone},
+                #{email},
+                #{password},
+                #{salt},
+                #{createTime}
+            )
+    </insert>
+
+    <insert id="addUserInfo" parameterType="com.syh.bilibili.domain.UserInfo">
+        INSERT INTO
+            t_user_info(
+                userId,
+                nickname,
+                avatar,
+                sign,
+                gender,
+                birthday,
+                createTime
+            ) VALUES (
+                #{userId},
+                #{nickname},
+                #{avatar},
+                #{sign},
+                #{gender},
+                #{birthday},
+                #{createTime}
+            )
+    </insert>
+
+    <select id="getUserById" parameterType="java.lang.Long" resultType="com.syh.bilibili.domain.User">
+        SELECT
+            *
+        FROM
+            t_user
+        WHERE
+            id = #{id}
+    </select>
+
+    <select id="getUserInfoByUserId" parameterType="java.lang.Long" resultType="com.syh.bilibili.domain.UserInfo">
+        SELECT
+            *
+        FROM
+            t_user_info
+        WHERE
+            userId = #{userId}
+    </select>
+</mapper>
